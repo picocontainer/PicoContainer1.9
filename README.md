@@ -6,12 +6,12 @@ api/impl split including classloader trees.  All recombined in this repo.
 Building:
 
 ```
-bazel build //src/java/com/intellij/util/pico:PicoContainer
+bazel build //src/java/com/intellij/util/pico:PicoContainer_deploy.jar
 ```
 
 There's no tests - they were not forked by JetBrains.
 
-You'll end up with `bazel-bin/PicoContainer.jar` that is 34.5K in size. 
+You'll end up with `bazel-bin/src/java/com/intellij/util/pico/PicoContainer_deploy.jar` that is 34.5K in size. 
 
 You would consider this v 1.9-alpha. Class `com.intellij.util.pico.DefaultPicoContainer` is the main lib entrypoint.
 

@@ -1,4 +1,4 @@
-java_library(
+java_binary(
     name = "PicoContainer",
     srcs = glob(["*.java"]),
     visibility = ["//visibility:public"],
