@@ -1,0 +1,6 @@
+.sources.txt
+.idea/
+.bin/
+# Ignore all bazel-* symlinks.
+/bazel-*
+picocontainer-*
