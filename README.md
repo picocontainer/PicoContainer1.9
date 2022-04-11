@@ -1,12 +1,14 @@
-PicoContainer 1.1 as forked and modified by JetBrains but then pulled out of their codebase and in a standalone repo
+PicoContainer 1.1 as forked and modified by JetBrains over the years ... but now pulled out of their codebase and in a standalone repository.
 
-JetBrains did a bunch of work on the original: generics work and removal of all the features they didn't need.  They moved some classes to other packages. Indeed to other buildable jars. Most likely that's cose they wanted their own
+JetBrains did a bunch of work on the original: generics work and removal of all the features they didn't need.  They moved some classes to other packages. Indeed, to other buildable jars. Most likely that's because they wanted their own
 api/impl split including classloader trees.  All recombined in this repo.
 
 
 You would consider this v 1.9-alpha. Class `com.intellij.util.pico.DefaultPicoContainer` is the main lib entrypoint.
 
 Apache 2 license. Multiple copyright holders and authors. Historical PicoContainer 1.1 is here: https://github.com/picocontainer/PicoContainer1
+
+# Playing with different build technologies
 
 ## Bazel
 
@@ -34,8 +36,8 @@ Compile
 
 ```
 mvn compile 
-
 ```
+
 Compile, test compile, run tests
 
 ```
