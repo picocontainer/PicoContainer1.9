@@ -50,7 +50,7 @@ Compile, test compile, run tests, and make a jar
 mvn install 
 ```
 
-## Bash scripts showing javac/java usage (no maven, no bazel)
+## Bash scripts showing classic javac/java usage (no maven, no bazel)
 
 All these should compile, test compile, run tests, and make a jar
 
@@ -63,11 +63,11 @@ This one uses a build in feature of javac to work out what needs to be compiled 
 This one naively attempt to build everything in the source tree - barfing on a `RedHerring.java` that doesn't compile:
 
 ```
-./naive_classic_build.sh.sh
+./naive_classic_build.sh
 ```
 
 This one naively attempt to build everything in the source tree with some masking out of `RedHerring.java` (that doesn't compile) using sed:
 
 ```
-./naive_masked_build.sh.sh
+./naive_masked_build.sh
 ```
