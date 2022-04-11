@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 find src/java -name "*.java" > .sources.txt

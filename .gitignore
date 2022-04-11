@@ -3,4 +3,6 @@
 .bin/
 # Ignore all bazel-* symlinks.
 /bazel-*
+target/
+.ijwb/
 picocontainer-*
