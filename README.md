@@ -20,15 +20,20 @@ bazel build //src/java/com/intellij/util/pico:PicoContainer_deploy.jar
 
 You'll end up with `bazel-bin/src/java/com/intellij/util/pico/PicoContainer_deploy.jar` that is 34.5K in size.
 
-There's a source file that doesn't compile. You'd never normally check that it, but it serves as a clear stop-the-build 
-trick for the sake of comparison of build technologies.  Try it with `bazel build //src/java/org/picocontainer/redherring:RedHerring`. 
-This isn't a problem for the bazel builds we count as important as nothing depends on this build target in the DAG.
-
 JetBrains did not fork any of the original unit tests out of PicoContainer 1.1. There is one new basic test added here that we can test:
 
 ```
 bazel test //src/test/org/picocontainer/tests/integration:tests
 ```
+### Oopsies
+
+![](https://user-images.githubusercontent.com/82182/163056846-899bcdcc-61aa-408c-8a7c-a38e310d3190.png)
+
+There's a source file that doesn't compile. You'd never normally check that it, but it serves as a clear stop-the-build
+trick for the sake of comparison of build technologies. Try it with `bazel build //src/java/org/picocontainer/redherring:RedHerring`.
+This isn't a problem for the bazel builds we count as important as nothing depends on this BUILD target in the DAG.  
+Take a [look at the directory](https://github.com/picocontainer/PicoContainer1.9/tree/main/src/java/org/picocontainer/redherring/) 
+too - see the broken Java source and the BUILD file
 
 ## Maven
 
@@ -52,7 +57,7 @@ mvn install
 
 ## Bash scripts showing classic javac/java usage (no maven, no bazel)
 
-All these should compile, test compile, run tests, and make a jar
+All these SHOULD compile, test compile, run tests, and make a jar
 
 This one uses a build in feature of javac to work out what needs to be compiled and what does not - ignoring a `RedHerring.java` that doesn't compile:
 
@@ -66,7 +71,9 @@ This one naively attempt to build everything in the source tree - barfing on a `
 ./naive_classic_build.sh
 ```
 
-This one naively attempt to build everything in the source tree with some masking out of `RedHerring.java` (that doesn't compile) using sed:
+You woud not have committed breaking code, but I have as this is just a demo of build technologies.
+
+This next one naively attempt to build everything in the source tree with some masking out of `RedHerring.java` (that doesn't compile) using sed to remove it from the list of sources to compile (a cheap hack really):
 
 ```
 ./naive_masked_build.sh
