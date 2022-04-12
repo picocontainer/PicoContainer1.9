@@ -37,6 +37,9 @@ too - see the broken Java source and the BUILD file
 
 ## Maven
 
+The maven `pom.xml` is where the build is defined. There's even a hack in there to mask out the `RedHerring.java` source.
+[See here](https://github.com/picocontainer/PicoContainer1.9/tree/main/pom.xml)
+
 Compile
 
 ```
@@ -98,3 +101,11 @@ git sparse-checkout remove src/java/org/picocontainer/redherring
 ```
 
 Mucking around this way, gives you a glimpse of what Google's Blaze would readily do for committers in their monorepo subsetting down from many hundreds of different team's permutation of directories for meaningful buildable deployables.
+
+Note that the Maven build still works for the sparse checkout, as does `wise_classic_build.sh` and  `naive_masked_build.sh`
+
+When you've finished mucking around:
+
+``` 
+git sparse-checkout disable
+```
