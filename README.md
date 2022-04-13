@@ -84,4 +84,4 @@ This next one naively attempt to build everything in the source tree with some m
 ./naive_masked_build.sh
 ```
 
-Related blog entry, discussing this repo more: [More on Depth-first recursive vs DAG build technologies](https://paulhammant.con/2022/04/13/more-on-depth-first-recursive-vs-dag-build-techs)
+Related blog entry, discussing this repo more: [More on Depth-first recursive vs DAG build technologies](https://paulhammant.com/2022/04/13/more-on-depth-first-recursive-vs-dag-build-techs)
