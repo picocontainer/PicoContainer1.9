@@ -29,7 +29,7 @@ bazel test //src/test/org/picocontainer/tests/integration:tests
 
 ![](https://user-images.githubusercontent.com/82182/163056846-899bcdcc-61aa-408c-8a7c-a38e310d3190.png)
 
-There's a source file that doesn't compile. You'd never normally check that it, but it serves as a clear stop-the-build
+There's a source file that does not compile. You'd never normally check that it, but it serves as a clear stop-the-build
 trick for the sake of comparison of build technologies. Try it with `bazel build //src/java/org/picocontainer/redherring:RedHerring`.
 This isn't a problem for the bazel builds we count as important as nothing depends on this BUILD target in the DAG.  
 Take a [look at the directory](https://github.com/picocontainer/PicoContainer1.9/tree/main/src/java/org/picocontainer/redherring/) 
@@ -74,7 +74,9 @@ This one naively attempt to build everything in the source tree - barfing on a `
 ./naive_classic_build.sh
 ```
 
-You woud not have committed breaking code, but I have as this is just a demo of build technologies.
+^ SHOULD but doesn't by design.
+
+You would not have committed breaking code, but I have as this is just a demo of build technologies.
 
 This next one naively attempt to build everything in the source tree with some masking out of `RedHerring.java` (that doesn't compile) using sed to remove it from the list of sources to compile (a cheap hack really):
 
@@ -82,30 +84,4 @@ This next one naively attempt to build everything in the source tree with some m
 ./naive_masked_build.sh
 ```
 
-# Mucking around with Git's Sparse Checkout
-
-This feature came with Git 2.25 (Jan 2020). I had listed it as something that was needed in [June 2019](https://paulhammant.com/2019/06/14/merkle-trees-and-source-control/) but who knows whether the git leads read my blog entry. See also my [update to the same list](https://paulhammant.com/2020/01/19/vcs-nirvana/) in Jan 2020.
-
-```
-git sparse-checkout init --cone
-git sparse-checkout set third_party src/java/org/picocontainer/defaults "src/java/org/picocontainer/*.java" "src/java/org/picocontainer/BUILD" src/java/org/jetbrains src/java/com src/test README.md pom.xml "*.sh" WORKSPACE ".all*"
-```
-
-This elaborate modification to the checkout allow the `RedHerring.java` to be ignored in all situations. Specifically `./naive_classic_build.sh` build passes instead of fails. Whereas `naive_masked_build.sh` asked out the reg herring via sed trick, this new way doesn't need to hide the dir/file as it is no longer there.
-
-Git sparse checkout has 'set' for a big list as above. This smushes prior settings each time you use it. It also has 'add' which adds new patterns to the list it had before. I think 'remove' is needed. My case above could be just:
-
-```
-git sparse-checkout init --cone
-git sparse-checkout remove src/java/org/picocontainer/redherring 
-```
-
-Mucking around this way, gives you a glimpse of what Google's Blaze would readily do for committers in their monorepo subsetting down from many hundreds of different team's permutation of directories for meaningful buildable deployables.
-
-Note that the Maven build still works for the sparse checkout, as does `wise_classic_build.sh` and  `naive_masked_build.sh`
-
-When you've finished mucking around:
-
-``` 
-git sparse-checkout disable
-```
+Related blog entry, discussing this repo more: [More on Depth-first recursive vs DAG build technologies](https://paulhammant.con/2022/04/13/more-on-depth-first-recursive-vs-dag-build-techs)
